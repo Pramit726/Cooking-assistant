@@ -1,8 +1,4 @@
-# cohere:
-#   api_key: "Ljz0dccVUaMbRLqatentczXB0PHA5VAehKttCSE5"
-
 pinecone:
-  # api_key: "pcsk_61zeWQ_Lj4c7XDe2YoXLFcMzGvp4N4EbdX55aCebd3XSfwC9Avns9jniKnJuDRbS6N3Pqe"
   index_name: "cooking-helper"
   dimension: 1024  # Cohere embed-english-v3.0 returns 1024-dimensional vectors
 
@@ -34,7 +30,6 @@ pdf_summary: |
   For anything else return wikipedia:
 
 groq:
-  # api_key: "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"
   model: gemma2-9b-it
 
 
