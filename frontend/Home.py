@@ -1,8 +1,12 @@
 import streamlit as st
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # FastAPI endpoint
-API_URL = "http://localhost:8000/chat"
+API_URL = os.getenv("API_URL", "http://localhost:8000/chat")
 
 st.set_page_config(page_title="RasoiGuru 🍳", page_icon="🍲")
 st.title("🤖 RasoiGuru - Your AI Cooking Assistant")
