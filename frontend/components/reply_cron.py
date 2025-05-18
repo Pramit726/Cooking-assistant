@@ -1,9 +1,12 @@
 import os
 
-from classifier import needs_reply_llm
-from comment_ops import fetch_unreplied_comments, update_comment_reply
 from dotenv import load_dotenv
 
+from frontend.components.classifier import needs_reply_llm
+from frontend.components.comment_ops import (
+    fetch_unreplied_comments,
+    update_comment_reply,
+)
 from llm.groq_qa import get_llm_answer
 from loaders.wiki_loader import get_wiki_chunks
 from memory.conversation_memory import ConversationMemory
