@@ -1,7 +1,7 @@
 import os
 
-from components.classifier import needs_reply_llm
-from components.comment_ops import fetch_unreplied_comments, update_comment_reply
+from classifier import needs_reply_llm
+from comment_ops import fetch_unreplied_comments, update_comment_reply
 from dotenv import load_dotenv
 
 from llm.groq_qa import get_llm_answer
