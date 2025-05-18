@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-from loaders.pdf_loader import load_and_chunk_pdf
+from loaders.pdf_loader import load_and_chunk_pdfs
 from utils.config_loader import load_config
 from vectorstore.embedder import Embedder
 from vectorstore.pinecone_uploader import PineconeUploader
@@ -12,14 +12,14 @@ def main():
     # Load configuration
     config = load_config()
     load_dotenv()
-    pdf_path = config["pdf_path"]
+    pdf_path = config["pdf_paths"]
     cohere_api_key = os.getenv("COHERE_API_KEY")
     pinecone_api_key = os.getenv("PINECONE_API_KEY")
     pinecone_index = config["pinecone"]["index_name"]
     pinecone_dim = config["pinecone"]["dimension"]
 
     # Step 1: Load and split PDF
-    chunks = load_and_chunk_pdf(pdf_path)
+    chunks = load_and_chunk_pdfs(pdf_path)
 
     # Step 2: Embed
     embedder = Embedder(cohere_api_key)

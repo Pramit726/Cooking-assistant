@@ -2,7 +2,10 @@ pinecone:
   index_name: "cooking-helper"
   dimension: 1024  # Cohere embed-english-v3.0 returns 1024-dimensional vectors
 
-pdf_path: "data/BHM-401T.pdf"
+pdf_paths:
+  # - "data/BHM-401T.pdf"
+  - "data/Chicken Biryani Recipe - Swasthi's Recipes.pdf"
+  - "data/Dosa Recipe, How to make Dosa Batter - Swasthi's Recipes.pdf"
 
 
 chunking:
@@ -31,5 +34,6 @@ pdf_summary: |
 
 groq:
   model: gemma2-9b-it
-
+  # model: llama-3.1-8b-instant
+  # model: deepseek-r1-distill-llama-70b
 

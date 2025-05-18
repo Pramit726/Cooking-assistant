@@ -21,7 +21,7 @@ retriever = Retriever(
 
 # Set up FastAPI app
 app = FastAPI(title="RasoiGuru - AI Cooking Assistant")
-memory = ConversationMemory(max_memory=5)
+memory = ConversationMemory(max_memory=7)
 
 # Endpoint
 @app.post("/chat")
@@ -39,8 +39,10 @@ def chat_with_rasoiguru(request: QueryRequest):
         # Step 2: Retrieve documents
         if source == "pdf":
             docs = retriever.retrieve(query)
+            print(f"[INFO] Retrieved {docs} documents from PDF.")
         else:
             docs = get_wiki_chunks(topic=query)
+            print(f"[INFO] Retrieved {docs} documents from Wikipedia.")
 
         if not docs:
             return {"response": "⚠️ No relevant documents found."}
@@ -50,6 +52,7 @@ def chat_with_rasoiguru(request: QueryRequest):
 
         # Step 4: Memory context
         memory_context = memory.get_memory_context()
+        print(f"[INFO] Memory context: {memory_context}")
 
         # Step 5: LLM response
         answer = get_llm_answer(query, context, memory_context)

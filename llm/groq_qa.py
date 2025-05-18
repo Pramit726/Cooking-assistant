@@ -72,3 +72,41 @@ Respond in a friendly, clear way.
     except requests.exceptions.RequestException as e:
         print(f"[ERROR] Request failed: {e}")
         return "Sorry, I couldn't process the request at the moment."
+
+
+# Function to decide if a user comment requires a reply
+def is_comment_question(comment: str) -> bool:
+    prompt = f"""
+You are a helpful AI assistant moderating a cooking chatbot.
+
+Determine whether the following user comment is a **question** or **requires a reply** from the assistant.
+
+Comment:
+\"{comment}\"
+
+Reply with only YES or NO. Do not explain.
+""".strip()
+
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json",
+    }
+
+    payload = {
+        "model": GROQ_MODEL,
+        "messages": [{"role": "user", "content": prompt}],
+    }
+
+    try:
+        response = requests.post(
+            "https://api.groq.com/openai/v1/chat/completions",
+            json=payload,
+            headers=headers,
+        )
+        response.raise_for_status()
+        output = response.json()["choices"][0]["message"]["content"].strip().lower()
+        return "yes" in output
+
+    except requests.exceptions.RequestException as e:
+        print(f"[ERROR] Classifier request failed: {e}")
+        return False
