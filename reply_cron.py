@@ -29,6 +29,7 @@ memory = ConversationMemory(max_memory=5)
 
 def run_cron():
     comments = fetch_unreplied_comments()
+    print(f"[INFO] Found {len(comments)} unreplied comments.")
     for comment_row in comments:
         comment_id, recipe, name, comment = comment_row
 
@@ -60,3 +61,7 @@ def run_cron():
 
         except Exception as e:
             print(f"[ERROR] Failed to process comment {comment_id}: {e}")
+
+
+if __name__ == "__main__":
+    run_cron()

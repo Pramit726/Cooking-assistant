@@ -1,46 +1,55 @@
-from datetime import datetime
+import os
 
 import streamlit as st
-from db_config import engine
-from sqlalchemy.sql import text
+from dotenv import load_dotenv
+from sqlalchemy import create_engine, text
+
+load_dotenv()
+
+# Load DB URL from environment or secrets
+DATABASE_URL = os.getenv("DATABASE_URL")
+engine = create_engine(DATABASE_URL)
 
 
-def comment_section(recipe_key):
-    st.markdown("---")
-    st.subheader("💬 Leave a Comment")
+def comment_section(recipe_name):
+    st.header("💬 Comments")
 
-    with st.form(f"form_{recipe_key}"):
-        name = st.text_input("Name", key=f"name_{recipe_key}")
-        comment_text = st.text_area("Comment", key=f"comment_{recipe_key}")
-        if st.form_submit_button("Submit Comment") and name and comment_text:
+    with engine.connect() as conn:
+        # Fetch existing comments for this recipe
+        result = conn.execute(
+            text(
+                "SELECT name, comment, reply_text, timestamp FROM comments WHERE recipe = :recipe ORDER BY timestamp DESC"
+            ),
+            {"recipe": recipe_name},
+        ).fetchall()
+
+    for row in result:
+        name, comment, reply, timestamp = row
+        with st.container():
+            st.markdown(
+                f"** {name}** said at {timestamp.strftime('%Y-%m-%d %H:%M:%S')}"
+            )
+            st.markdown(f"> {comment}")
+            if reply:
+                st.success(f"AI Reply: {reply}")
+            st.markdown("---")
+
+    # Add new comment
+    with st.form(key=f"comment_form_{recipe_name}"):
+        st.subheader("Add Your Comment")
+        user_name = st.text_input("Your Name")
+        user_comment = st.text_area("Your Comment")
+        submitted = st.form_submit_button("Submit")
+
+        if submitted and user_name and user_comment:
             with engine.begin() as conn:
                 conn.execute(
                     text(
                         """
-                    INSERT INTO comments (recipe, name, comment)
-                    VALUES (:recipe, :name, :comment)
-                """
+                        INSERT INTO comments (recipe, name, comment, replied, timestamp)
+                        VALUES (:recipe, :name, :comment, FALSE, NOW())
+                        """
                     ),
-                    {"recipe": recipe_key, "name": name, "comment": comment_text},
+                    {"recipe": recipe_name, "name": user_name, "comment": user_comment},
                 )
-            st.success("Thanks for your comment!")
-
-    with engine.connect() as conn:
-        results = conn.execute(
-            text(
-                """
-            SELECT name, comment, timestamp FROM comments
-            WHERE recipe = :recipe ORDER BY timestamp DESC
-        """
-            ),
-            {"recipe": recipe_key},
-        ).fetchall()
-
-    if results:
-        st.markdown("### 📝 Comments")
-        for name, comment, timestamp in results:
-            st.markdown(
-                f"**{name}** wrote on _{timestamp.strftime('%Y-%m-%d %H:%M:%S')}_:"
-            )
-            st.markdown(f"> {comment}")
-            st.markdown("---")
+            st.success("Comment added! Refresh the page to see it below.")

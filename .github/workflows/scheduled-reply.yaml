@@ -2,7 +2,7 @@ name: Scheduled Comment Replier
 
 on:
   schedule:
-    - cron: '*/2 * * * *'  # ⏱ Every 2 minutes
+    - cron: '0 * * * *'  # Runs every hour 
   workflow_dispatch:  # Allows manual run from GitHub UI
 
 jobs:

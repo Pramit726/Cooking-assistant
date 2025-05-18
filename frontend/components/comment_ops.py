@@ -1,5 +1,7 @@
-from db_config import engine
+# from db_config import engine
 from sqlalchemy.sql import text
+
+from frontend.components.db_config import engine
 
 
 def fetch_unreplied_comments():
@@ -8,7 +10,7 @@ def fetch_unreplied_comments():
             text(
                 """
             SELECT id, recipe, name, comment FROM comments
-            WHERE replied = FALSE AND timestamp < NOW() - INTERVAL '24 hours'
+            WHERE replied = FALSE AND timestamp > NOW() - INTERVAL '24 hours'
         """
             )
         ).fetchall()

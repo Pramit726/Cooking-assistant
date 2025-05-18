@@ -13,27 +13,31 @@ chunking:
   chunk_overlap: 50
 
 pdf_summary: |
-  This PDF contains detailed information about Indian food cooking, Indian food ingredients and heritage including:
-  Philosophy of Indian Food  
-  1.3.1 Pre Ancient Era 
-  1.3.2 Ancient Era 
-  The Great Indian Cuisine – Key Features  
-  1.4.1 Classification of Food Based on Nature 
-  1.4.2 Classification of Food Based on Vargas 
-  1.4.3 Classification of Foods Based on Nutrients 
-  Regional Influences on Indian Food  
-  1.5.1 Indian Regional Cuisine at a glance 
-  1.5.1.1 South India 
-  1.5.1.2 North-east 
-  1.5.1.3 North India 
-  1.5.1.4 Western India 
-  1.5.1.5 Eastern India
-  - Ingredient lists and spice combinations
-  - Cooking methods for traditional Indian meals
-  For anything else return wikipedia:
+  - The pdf contains detailed recipes about Biryani and Dosa.
+  
 
 groq:
   model: gemma2-9b-it
   # model: llama-3.1-8b-instant
   # model: deepseek-r1-distill-llama-70b
+
+
+# This PDF contains detailed information about Indian food cooking, Indian food ingredients and heritage including:
+  # Philosophy of Indian Food  
+  # 1.3.1 Pre Ancient Era 
+  # 1.3.2 Ancient Era 
+  # The Great Indian Cuisine – Key Features  
+  # 1.4.1 Classification of Food Based on Nature 
+  # 1.4.2 Classification of Food Based on Vargas 
+  # 1.4.3 Classification of Foods Based on Nutrients 
+  # Regional Influences on Indian Food  
+  # 1.5.1 Indian Regional Cuisine at a glance 
+  # 1.5.1.1 South India 
+  # 1.5.1.2 North-east 
+  # 1.5.1.3 North India 
+  # 1.5.1.4 Western India 
+  # 1.5.1.5 Eastern India
+  # - Ingredient lists and spice combinations
+  # - Cooking methods for traditional Indian meals
+  # For anything else return wikipedia:
 
