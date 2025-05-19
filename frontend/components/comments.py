@@ -27,7 +27,7 @@ def comment_section(recipe_name):
         name, comment, reply, timestamp = row
         with st.container():
             st.markdown(
-                f"** {name}** said at {timestamp.strftime('%Y-%m-%d %H:%M:%S')}"
+                f"**{name}** said at {timestamp.strftime('%Y-%m-%d %H:%M:%S')}"
             )
             st.markdown(f"> {comment}")
             if reply:
