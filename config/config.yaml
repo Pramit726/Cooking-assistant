@@ -5,7 +5,7 @@ pinecone:
 pdf_paths:
   # - "data/BHM-401T.pdf"
   - path: "data/Chicken Biryani Recipe - Swasthi's Recipes.pdf"
-    namespace: "chicken_biryani"
+    namespace: "chickenbiryani"
   - path: "data/Dosa Recipe, How to make Dosa Batter - Swasthi's Recipes.pdf"
     namespace: "dosa"
 

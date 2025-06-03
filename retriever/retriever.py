@@ -19,6 +19,7 @@ class Retriever:
         results = self.index.query(
             vector=query_embedding, top_k=top_k, namespace=recipe, include_metadata=True
         )
+        print(f"[DEBIG]namespace: {recipe}")
         print(f"[INFO] Retrieved {len(results['matches'])} matches from Pinecone")
         print(f"[INFO] Retrieved matches: {results['matches']}")
 
