@@ -1,7 +1,6 @@
 import uuid
 
 from langchain.schema import Document
-
 from pinecone import Pinecone, ServerlessSpec
 
 
@@ -19,6 +18,7 @@ class PineconeUploader:
             )
 
         self.index = pinecone.Index(index_name)
+        # self.namespace = namespace
 
     def upsert_documents(self, documents, embeddings):
         vectors = []
@@ -31,6 +31,8 @@ class PineconeUploader:
 
             vectors.append({"id": vector_id, "values": embedding, "metadata": metadata})
 
-        # Upsert vectors to Pinecone
-        self.index.upsert(vectors=vectors)
+        for vector in vectors:
+            namespace = vector.get("metadata", {}).get("namespace", "default")
+            self.index.upsert(vectors=[vector], namespace=namespace)
+
         print(f"[INFO] Upserted {len(vectors)} documents to Pinecone")

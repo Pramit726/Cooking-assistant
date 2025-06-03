@@ -11,13 +11,13 @@ class Retriever:
         pinecone = Pinecone(api_key=pinecone_api_key)
         self.index = pinecone.Index(index_name)
 
-    def retrieve(self, query, top_k=5):
+    def retrieve(self, query, recipe, top_k=5):
         # Step 1: Embed the query using the same embedder
         query_embedding = self.embedder.embed_query(query)
 
         # Step 2: Query Pinecone for the most similar vectors
         results = self.index.query(
-            vector=query_embedding, top_k=top_k, include_metadata=True
+            vector=query_embedding, top_k=top_k, namespace=recipe, include_metadata=True
         )
         print(f"[INFO] Retrieved {len(results['matches'])} matches from Pinecone")
         print(f"[INFO] Retrieved matches: {results['matches']}")

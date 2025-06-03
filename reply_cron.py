@@ -6,6 +6,7 @@ from frontend.components.classifier import needs_reply_llm
 from frontend.components.comment_ops import (
     fetch_unreplied_comments,
     update_comment_reply,
+    update_reply_status,
 )
 from llm.groq_qa import get_llm_answer
 from loaders.wiki_loader import get_wiki_chunks
@@ -33,15 +34,22 @@ def run_cron():
     for comment_row in comments:
         comment_id, recipe, name, comment = comment_row
 
-        print(f"🔍 Checking comment by {name}: {comment}")
-        if not needs_reply_llm(comment):
+        print(f"[INFO] Checking comment by {name}: {comment}")
+        reply_need = needs_reply_llm(comment)
+        print(f"[INFO] Reply needed to comment ID {comment_id}->{reply_need}")
+
+        # If no reply is needed
+
+        if not reply_need:
+            # Update reply status if no reply is needed
+            update_reply_status(comment_id)
             continue
 
         try:
             # Routing: Wiki or PDF
-            source = get_llm_routing_decision(recipe)
+            source = get_llm_routing_decision(query=comment, recipe=recipe)
             docs = (
-                retriever.retrieve(recipe)
+                retriever.retrieve(query=comment, recipe=recipe)
                 if source == "pdf"
                 else get_wiki_chunks(recipe)
             )
@@ -54,7 +62,7 @@ def run_cron():
                 [doc.page_content for doc in docs if doc.page_content.strip()]
             )
             memory_context = memory.get_memory_context()
-            reply = get_llm_answer(comment, context, memory_context)
+            reply = get_llm_answer(comment, context, recipe, memory_context)
 
             update_comment_reply(comment_id, reply)
             print(f"[INFO] Replied to comment ID {comment_id}")

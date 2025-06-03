@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from utils.config_loader import load_config
 
 config = load_config()
-load_dotenv() 
+load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_MODEL = config["groq"].get("model", "llama3-8b-8192")
@@ -31,7 +31,9 @@ Answer in a friendly and concise manner.
 
 
 # Function to get the LLM's answer
-def get_llm_answer(question: str, context: str, memory_context: str = "") -> str:
+def get_llm_answer(
+    question: str, context: str, recipe: str, memory_context: str = ""
+) -> str:
     headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json",
@@ -46,6 +48,9 @@ This is the past conversation for reference:
 
 Use the following context (from documents) to answer the current question:
 \"\"\"{context}\"\"\"
+
+Concerned recipe:
+\"{recipe}\""
 
 Current Question:
 \"{question}\""

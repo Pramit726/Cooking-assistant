@@ -11,11 +11,11 @@ recipe_option = st.sidebar.selectbox(
 
 if recipe_option == "Chicken Biryani":
     biryani.render()
-    comment_section("Chicken Biryani")
+    comment_section("chickenbiryani")
 
 elif recipe_option == "Dosa":
     dosa.render()
-    comment_section("Dosa")
+    comment_section("dosa")
 
 else:
     st.title("🚧 Coming Soon!")

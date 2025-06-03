@@ -12,14 +12,15 @@ def main():
     # Load configuration
     config = load_config()
     load_dotenv()
-    pdf_path = config["pdf_paths"]
+    pdf_info_list = config["pdf_paths"]
     cohere_api_key = os.getenv("COHERE_API_KEY")
     pinecone_api_key = os.getenv("PINECONE_API_KEY")
     pinecone_index = config["pinecone"]["index_name"]
     pinecone_dim = config["pinecone"]["dimension"]
+    # namespace = pdf_info.get("namespace", "default")
 
     # Step 1: Load and split PDF
-    chunks = load_and_chunk_pdfs(pdf_path)
+    chunks = load_and_chunk_pdfs(pdf_info_list)
 
     # Step 2: Embed
     embedder = Embedder(cohere_api_key)

@@ -28,3 +28,17 @@ def update_comment_reply(comment_id: int, reply: str):
             ),
             {"id": comment_id, "reply": reply},
         )
+
+
+def update_reply_status(comment_id: int):
+    with engine.begin() as conn:
+        conn.execute(
+            text(
+                """
+            UPDATE comments
+            SET replied = TRUE
+            WHERE id = :id
+        """
+            ),
+            {"id": comment_id},
+        )

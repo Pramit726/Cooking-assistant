@@ -11,7 +11,7 @@ pdf_summary = config["pdf_summary"]  # Load from config instead of hardcoding
 
 
 # Function to build the routing prompt for the LLM
-def build_routing_prompt(query: str, pdf_summary: str) -> str:
+def build_routing_prompt(query: str, recipe: str, pdf_summary: str) -> str:
     return f"""
 You are an intelligent assistant. Based on the following context from a PDF and the user query,
 decide whether the answer can be found in the PDF or should be looked up on Wikipedia.
@@ -22,17 +22,20 @@ Context from PDF:
 User Query:
 \"{query}\"
 
+Recipe:
+\"{recipe}\"
+
 Respond with either 'pdf' if the answer is in the PDF, or 'wikipedia' if it should be looked up on Wikipedia.
 """.strip()
 
 
 # Function to get the LLM's decision on where to route the query
-def get_llm_routing_decision(query: str) -> str:
+def get_llm_routing_decision(query: str, recipe: str) -> str:
     groq_api_key = os.getenv("GROQ_API_KEY")
     model = config["groq"].get("model", "llama3-8b-8192")
 
     # Prepare the routing prompt with the user query and PDF summary
-    prompt = build_routing_prompt(query, pdf_summary)
+    prompt = build_routing_prompt(query, recipe, pdf_summary)
 
     headers = {
         "Authorization": f"Bearer {groq_api_key}",
