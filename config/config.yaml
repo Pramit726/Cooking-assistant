@@ -3,11 +3,30 @@ pinecone:
   dimension: 1024  # Cohere embed-english-v3.0 returns 1024-dimensional vectors
 
 pdf_paths:
-  # - "data/BHM-401T.pdf"
-  - path: "data/Chicken Biryani Recipe - Swasthi's Recipes.pdf"
+  - path: "data/breakfast/Masala Dosa Recipe (Restaurant Style) - Swasthi's Recipes.pdf"
+    namespace: "masaladosa"
+  - path: "data/breakfast/Upma Recipe (Rava Upma) - Swasthi's Recipes.pdf"
+    namespace: "upma"
+  - path: "data/dessert/Gulab Jamun Recipe - Swasthi's Recipes.pdf"
+    namespace: "gulabjamun"
+  - path: "data/dessert/Kheer Recipe (Rice Kheer) - Swasthi's Recipes.pdf"
+    namespace: "kheer"
+  - path: "data/non_veg_curry/Chicken Bhuna Masala Recipe - Swasthi's Recipes.pdf"
+    namespace: "chickenbhunamasala"
+  - path: "data/non_veg_curry/Chicken Butter Masala - Swasthi's Recipes.pdf"
+    namespace: "chickenbuttermasala"
+  - path: "data/rice_non_veg/Chicken Biryani Recipe - Swasthi's Recipes.pdf"
     namespace: "chickenbiryani"
-  - path: "data/Dosa Recipe, How to make Dosa Batter - Swasthi's Recipes.pdf"
-    namespace: "dosa"
+  - path: "data/rice_veg/Pulao Recipe _ Veg Pulao _ Vegetable Pulao _ Pulav - Swasthi's Recipes.pdf"
+    namespace: "pulao"
+  - path: "data/snacks/Onion Bhaji Recipe (Better than Restaurant) - Swasthi's Recipes.pdf"
+    namespace: "onionbhaji"
+  - path: "data/snacks/Samosa Recipe (Punjabi Potato Samosa) - Swasthi's Recipes.pdf"
+    namespace: "samosa"
+  - path: "data/veg_curry/Aloo Gobi Masala - Swasthi's Recipes.pdf"
+    namespace: "aloogobi"
+  - path: "data/veg_curry/Baingan Bharta Recipe (Eggplant Bharta) - Swasthi's Recipes.pdf"
+    namespace: "bainganbharta"
 
 
 chunking:
@@ -19,8 +38,8 @@ pdf_summary: |
   
 
 groq:
-  model: gemma2-9b-it
-  # model: llama-3.1-8b-instant
+  # model: gemma2-9b-it
+  model: llama-3.1-8b-instant
   # model: deepseek-r1-distill-llama-70b
 
 

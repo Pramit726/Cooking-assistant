@@ -31,6 +31,8 @@ class PineconeUploader:
 
             vectors.append({"id": vector_id, "values": embedding, "metadata": metadata})
 
+        print(f"[INFO] Received {len(vectors)} documents")
+
         for vector in vectors:
             namespace = vector.get("metadata", {}).get("namespace", "default")
             self.index.upsert(vectors=[vector], namespace=namespace)
