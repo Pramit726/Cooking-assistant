@@ -34,12 +34,25 @@ chunking:
   chunk_overlap: 50
 
 pdf_summary: |
-  - The pdf contains detailed recipes about Biryani and Dosa.
+  - The PDFs contain comprehensive Indian recipes categorized under breakfast, dessert, curry (veg and non-veg), rice dishes, and snacks.
+  - In breakfast - masaladosa and upma recipes are included.
+  - In dessert - gulab jamun and kheer recipes are included.
+  - In non-veg curry - chicken bhuna masala and chicken butter masala recipes are included.
+  - In rice dishes - chicken biryani and pulao recipes are included.
+  - In snacks - onion bhaji and samosa recipes are included.
+  - In veg curry - aloo gobi and baingan bharta recipes are included.
+  - Each recipe document typically includes:
+    - A detailed list of **Ingredients**, with quantity and preparation notes.
+    - Step-by-step **Instructions** or **cooking procedures** that cover traditional and restaurant-style techniques.
+    - Optional cooking **tips** and alternatives for ingredients.
+    - A section on **Nutrition facts**, covering approximate calorie count, protein, fat, and carbohydrate content per serving.
+  - These PDFs are sourced from Swasthi’s Recipes and serve as reliable cooking references for Indian home cooking and culinary learning.
+  - The documents serve as the knowledge base for context retrieval by the chatbot for user queries.
   
 
 groq:
-  # model: gemma2-9b-it
-  model: llama-3.1-8b-instant
+  model: gemma2-9b-it
+  # model: llama-3.1-8b-instant
   # model: deepseek-r1-distill-llama-70b
 
 
