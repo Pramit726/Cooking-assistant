@@ -51,8 +51,8 @@ pdf_summary: |
   
 
 groq:
-  model: gemma2-9b-it
-  # model: llama-3.1-8b-instant
+  # model: gemma2-9b-it
+  model: llama-3.1-8b-instant
   # model: deepseek-r1-distill-llama-70b
 
 
