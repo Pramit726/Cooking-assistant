@@ -48,11 +48,18 @@ def run_cron():
         try:
             # Routing: Wiki or PDF
             source = get_llm_routing_decision(query=comment, recipe=recipe)
-            docs = (
-                retriever.retrieve(query=comment, recipe=recipe)
-                if source == "pdf"
-                else get_wiki_chunks(recipe)
-            )
+            # docs = (
+            #     retriever.retrieve(query=comment, recipe=recipe)
+            #     if source == "pdf"
+            #     else get_wiki_chunks(recipe)
+            # )
+            print(f"Source:{source}")
+            if source == "pdf":
+                docs = (retriever.retrieve(query=comment, recipe=recipe))
+            else:
+                docs = get_wiki_chunks(recipe)
+
+            print(f"[DEBUG] Context : {docs}")
 
             if not docs:
                 print("[DEBUG] No context found for recipe:", recipe)

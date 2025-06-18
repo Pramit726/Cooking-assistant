@@ -36,5 +36,5 @@ def get_wiki_chunks(topic, chunk_size=500, chunk_overlap=50, max_chunks=5):
 
 
 if __name__ == "__main__":
-    docs = get_wiki_chunks(topic="Biryani")
+    docs = get_wiki_chunks(topic="Idli")
     print(docs[0].page_content)

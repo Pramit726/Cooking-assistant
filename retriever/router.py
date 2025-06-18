@@ -56,7 +56,7 @@ def get_llm_routing_decision(query: str, recipe: str) -> str:
         print(f"[DEBUG] LLM routing decision: {decision}")
 
         # Ensure the decision is either 'pdf' or 'wikipedia'
-        if "pdf" in decision:
+        if decision == "pdf":
             return "pdf"
         else:
             return "wikipedia"
